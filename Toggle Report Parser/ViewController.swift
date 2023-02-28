@@ -114,7 +114,7 @@ class ViewController: NSViewController {
             return BarChartDataEntry(x: Double(i), y: Double(report.totalSeconds), data: report)
         }
         
-        let dataSet = BarChartDataSet(entries: entries, label: "Hello")
+        let dataSet = BarChartDataSet(entries: entries, label: "Total Hours")
         dataSet.colors = [NSUIColor.red]
         dataSet.valueFormatter = HoursValueFormatter()
         
