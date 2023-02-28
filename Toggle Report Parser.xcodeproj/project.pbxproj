@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E9909D03BAFD69A33B0F09A /* libPods-Toggle Report Parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F72884278D600E1AC1EE62CF /* libPods-Toggle Report Parser.a */; };
+		CED360A829AE5648007A49F6 /* TogglReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED360A729AE5648007A49F6 /* TogglReport.swift */; };
+		CED360AA29AE5681007A49F6 /* ChartFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED360A929AE5681007A49F6 /* ChartFormatters.swift */; };
 		CEDB589C29ACD68700268905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB589B29ACD68700268905 /* AppDelegate.swift */; };
 		CEDB589E29ACD68700268905 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB589D29ACD68700268905 /* ViewController.swift */; };
 		CEDB58A029ACD68900268905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDB589F29ACD68900268905 /* Assets.xcassets */; };
@@ -17,6 +19,8 @@
 /* Begin PBXFileReference section */
 		5B512C27312798249C30FDDE /* Pods-Toggle Report Parser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toggle Report Parser.release.xcconfig"; path = "Target Support Files/Pods-Toggle Report Parser/Pods-Toggle Report Parser.release.xcconfig"; sourceTree = "<group>"; };
 		BA5AF2E7700CC0E4A67EDDD7 /* Pods-Toggle Report Parser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toggle Report Parser.debug.xcconfig"; path = "Target Support Files/Pods-Toggle Report Parser/Pods-Toggle Report Parser.debug.xcconfig"; sourceTree = "<group>"; };
+		CED360A729AE5648007A49F6 /* TogglReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglReport.swift; sourceTree = "<group>"; };
+		CED360A929AE5681007A49F6 /* ChartFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFormatters.swift; sourceTree = "<group>"; };
 		CEDB589829ACD68700268905 /* Toggle Report Parser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Toggle Report Parser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDB589B29ACD68700268905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEDB589D29ACD68700268905 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -52,7 +56,6 @@
 				BA5AF2E7700CC0E4A67EDDD7 /* Pods-Toggle Report Parser.debug.xcconfig */,
 				5B512C27312798249C30FDDE /* Pods-Toggle Report Parser.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -78,7 +81,9 @@
 			isa = PBXGroup;
 			children = (
 				CEDB589B29ACD68700268905 /* AppDelegate.swift */,
+				CED360A929AE5681007A49F6 /* ChartFormatters.swift */,
 				CEDB589D29ACD68700268905 /* ViewController.swift */,
+				CED360A729AE5648007A49F6 /* TogglReport.swift */,
 				CEDB589F29ACD68900268905 /* Assets.xcassets */,
 				CEDB58A129ACD68900268905 /* Main.storyboard */,
 				CEDB58A429ACD68900268905 /* Toggle_Report_Parser.entitlements */,
@@ -183,6 +188,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDB589E29ACD68700268905 /* ViewController.swift in Sources */,
+				CED360AA29AE5681007A49F6 /* ChartFormatters.swift in Sources */,
+				CED360A829AE5648007A49F6 /* TogglReport.swift in Sources */,
 				CEDB589C29ACD68700268905 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,99 +9,10 @@ import Cocoa
 import Quartz
 import Charts
 
-struct TogglReport : CustomStringConvertible {
-    
-    static var formatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.timeZone = .gmt
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }
-    
-    static var hoursFormatter: DateComponentsFormatter {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        return formatter
-    }
-    
-    var periodStartDate: Date?
-    var periodEndDate: Date?
-    var totalHours: DateComponents?
-    
-    var totalSeconds: Int {
-        guard let totalHours = totalHours else { return 0 }
-        return (totalHours.hour ?? 0) * 3600 + (totalHours.minute ?? 0) * 60 + (totalHours.second ?? 0)
-    }
-    
-    var totalDecimalHours: Double {
-        Double(totalSeconds) / 3600.0
-    }
-    
-    var totalHoursString: String {
-        (totalHours == nil) ? "Undefined" : Self.hoursFormatter.string(from: totalHours!)!
-    }
-    
-    var periodStartString: String {
-        (periodStartDate == nil)
-        ? "Start date undefined"
-        : Self.formatter.string(from: periodStartDate!)
-    }
-    
-    var periodEndString: String {
-        (periodStartDate == nil)
-        ? "End date undefined"
-        : Self.formatter.string(from: periodEndDate!)
-    }
-    
-    var description: String {
-        return "Period: \(periodStartString) - \(periodEndString), total hours: \(totalHoursString)"
-    }
-    
-}
-
-// MARK: Formatters
-
-class DatesAxisValueFormatter : AxisValueFormatter {
-    
-    var reports: [TogglReport]
-    
-    init(reports: [TogglReport]) {
-        self.reports = reports
-    }
-    
-    func stringForValue(_ value: Double, axis: Charts.AxisBase?) -> String {
-        let report = reports[Int(value)]
-        return "\(report.periodStartString)\n\(report.periodEndString)"
-    }
-    
-}
-
-class LeftAndRightHoursValueFormatter : AxisValueFormatter {
-    
-    func stringForValue(_ value: Double, axis: Charts.AxisBase?) -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        
-        return formatter.string(from: value)!
-    }
-    
-}
-
-class HoursValueFormatter: ValueFormatter {
-    
-    func stringForValue(_ value: Double,
-                        entry: Charts.ChartDataEntry,
-                        dataSetIndex: Int,
-                        viewPortHandler: Charts.ViewPortHandler?) -> String {
-        let report = entry.data as! TogglReport
-        return "\(report.totalHoursString)"
-    }
-    
-}
-
 class ViewController: NSViewController {
     
     @IBOutlet var barChartView: BarChartView!
+    @IBOutlet var combinePeriodsByMonthCheckBoxButton: NSButton!
     
     var reports = [TogglReport]()
     
@@ -380,6 +291,10 @@ class ViewController: NSViewController {
         
         let csvString = createCSV(from: reports)
         saveCSV(csvString)
+    }
+    
+    @IBAction func combinePeriodsByMonthsCheckBoxButtonAction(_ sender: NSButton) {
+        sender.state == .on
     }
     
     

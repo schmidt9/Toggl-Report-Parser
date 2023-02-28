@@ -689,6 +689,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="480" height="270"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -732,10 +733,22 @@
                                     <action selector="exportAsCSVButtonAction:" target="XfG-lQ-9wD" id="9fO-HS-S1f"/>
                                 </connections>
                             </button>
+                            <button toolTip="Combine periods if they completely belong to one calendar month (i.e. they start and end within one month)" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cp0-ac-SV5">
+                                <rect key="frame" x="230" y="235" width="197" height="18"/>
+                                <buttonCell key="cell" type="check" title="Combine periods by months" bezelStyle="regularSquare" imagePosition="left" inset="2" id="NOO-L8-j9P">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="combinePeriodsByMonthsCheckBoxButtonAction:" target="XfG-lQ-9wD" id="9jf-jP-yAd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="cp0-ac-SV5" firstAttribute="leading" secondItem="WLl-sh-OV9" secondAttribute="trailing" constant="8" symbolic="YES" id="8iU-J2-Bnw"/>
                             <constraint firstItem="jdT-6A-th1" firstAttribute="leading" secondItem="EFO-KD-1Ax" secondAttribute="leading" id="CyS-Fc-Vie"/>
                             <constraint firstAttribute="trailing" secondItem="jdT-6A-th1" secondAttribute="trailing" constant="20" symbolic="YES" id="JEd-eC-2RH"/>
+                            <constraint firstItem="cp0-ac-SV5" firstAttribute="centerY" secondItem="WLl-sh-OV9" secondAttribute="centerY" id="Ofm-bC-3Wn"/>
                             <constraint firstItem="EFO-KD-1Ax" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="16" id="PzQ-sH-9S6"/>
                             <constraint firstItem="WLl-sh-OV9" firstAttribute="centerY" secondItem="EFO-KD-1Ax" secondAttribute="centerY" id="QC9-fi-yq0"/>
                             <constraint firstItem="jdT-6A-th1" firstAttribute="top" secondItem="EFO-KD-1Ax" secondAttribute="bottom" constant="20" symbolic="YES" id="ZQA-P1-8Vk"/>
@@ -746,6 +759,7 @@
                     </view>
                     <connections>
                         <outlet property="barChartView" destination="jdT-6A-th1" id="lgn-B7-x7d"/>
+                        <outlet property="combinePeriodsByMonthCheckBoxButton" destination="cp0-ac-SV5" id="gxo-Qe-gAC"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
