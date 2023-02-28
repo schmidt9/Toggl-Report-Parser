@@ -323,15 +323,17 @@ class ViewController: NSViewController {
         alert.messageText = message
         alert.runModal()
     }
-     
+    
     // MARK: CSV Export
     
     /// https://stackoverflow.com/a/55870521/3004003
     func createCSV(from reports: [TogglReport]) -> String {
-        var csvString = "Period,Total Hours,Decimal Hours\n\n"
+        let separator = ";"
+        
+        var csvString = "Period\(separator)Total Hours\(separator)Decimal Hours\n\n"
         
         for record in reports {
-            csvString.append("\(record.periodStartString) - \(record.periodEndString),\(record.totalHoursString),\(record.totalDecimalHours)\n")
+            csvString.append("\(record.periodStartString) - \(record.periodEndString)\(separator)\(record.totalHoursString)\(separator)\(record.totalDecimalHours)\n")
         }
         
         return csvString
