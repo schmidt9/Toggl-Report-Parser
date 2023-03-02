@@ -14,7 +14,7 @@ class ViewController: NSViewController {
     @IBOutlet var barChartView: BarChartView!
     @IBOutlet var combinePeriodsByMonthCheckBoxButton: NSButton!
     
-    var reports = [TogglReport]()
+    var reports = [CombinedTogglReport]()
     
     
     // MARK: Chart
@@ -22,7 +22,7 @@ class ViewController: NSViewController {
     func outputChart() {
         
         let entries = reports.enumerated().map { i, report in
-            return BarChartDataEntry(x: Double(i), y: Double(report.totalSeconds), data: report)
+            return BarChartDataEntry(x: Double(i), y: Double(report.totalHoursInterval), data: report)
         }
         
         let dataSet = BarChartDataSet(entries: entries, label: "Total Hours")
@@ -52,7 +52,22 @@ class ViewController: NSViewController {
                 return
             }
             
-            reports.append(report)
+            let combinedReport = CombinedTogglReport(with: report)
+            
+            guard let lastReport = reports.last else {
+                // array is empty
+                reports.append(combinedReport)
+                return
+            }
+            
+            // combine new (source) report with the last added (terget) report
+            // while source and target are in the same month
+            let isCombined = combineReportsIfNeeded(sourceReport: report, targetReport: lastReport)
+            
+            if !isCombined {
+                // add as a new report having no children yet
+                reports.append(combinedReport)
+            }
         }
         
         reports = []
@@ -91,8 +106,6 @@ class ViewController: NSViewController {
             print("could not get string from pdf: \(String(describing: pdf))")
             return nil
         }
-        
-        var report = TogglReport()
         
         // Parse dates
         
@@ -135,13 +148,16 @@ class ViewController: NSViewController {
                                useLocalizedDateFormat: false)
         }
         
+        if dates == nil {
+                    showAlert(with: "Unable to parse period dates in \(url.path(percentEncoded: false))")
+                    return nil
+                }
+        
+        
+        let report = TogglReport()
+        
         report.periodStartDate = dates?.startDate
         report.periodEndDate = dates?.endDate
-        
-        if dates == nil {
-            showAlert(with: "Unable to parse period dates in \(url.path(percentEncoded: false))")
-            return nil
-        }
         
         // Parse hours
         
@@ -153,12 +169,14 @@ class ViewController: NSViewController {
                                     pattern: "TOTAL HOURS: (\\d+):(\\d+):(\\d+)")
         }
         
-        report.totalHours = totalHours
-        
         if totalHours == nil {
             showAlert(with: "Unable to parse hours in \(url.path(percentEncoded: false))")
             return nil
         }
+
+        report.setTotalHoursInterval(with: totalHours!.hour!,
+                                     minutes: totalHours!.minute!,
+                                     seconds: totalHours!.second!)
         
         return report
     }
@@ -226,6 +244,15 @@ class ViewController: NSViewController {
         return nil
     }
     
+    func combineReportsIfNeeded(sourceReport: TogglReport, targetReport: CombinedTogglReport) -> Bool {
+        if targetReport.belongsToOneMonth(with: sourceReport) {
+            targetReport.addReport(sourceReport)
+            return true
+        }
+        
+        return false
+    }
+    
     // MARK: Helpers
     
     func showAlert(with message: String) {
@@ -243,8 +270,8 @@ class ViewController: NSViewController {
         
         var csvString = "Period\(separator)Total Hours\(separator)Decimal Hours\n\n"
         
-        for record in reports {
-            csvString.append("\(record.periodStartString) - \(record.periodEndString)\(separator)\(record.totalHoursString)\(separator)\(record.totalDecimalHours)\n")
+        for report in reports {
+            csvString.append("\(report.periodStartString) - \(report.periodEndString)\(separator)\(report.totalHoursString)\(separator)\(report.totalDecimalHours)\n")
         }
         
         return csvString
@@ -294,7 +321,11 @@ class ViewController: NSViewController {
     }
     
     @IBAction func combinePeriodsByMonthsCheckBoxButtonAction(_ sender: NSButton) {
-        sender.state == .on
+        let shouldCombine = (sender.state == .on)
+        
+        if shouldCombine && !reports.isEmpty {
+            
+        }
     }
     
     

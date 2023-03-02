@@ -735,7 +735,7 @@
                             </button>
                             <button toolTip="Combine periods if they completely belong to one calendar month (i.e. they start and end within one month)" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cp0-ac-SV5">
                                 <rect key="frame" x="230" y="235" width="197" height="18"/>
-                                <buttonCell key="cell" type="check" title="Combine periods by months" bezelStyle="regularSquare" imagePosition="left" inset="2" id="NOO-L8-j9P">
+                                <buttonCell key="cell" type="check" title="Combine periods by months" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="NOO-L8-j9P">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
